@@ -33,3 +33,14 @@ app.post('/login', (req, res) => {
     }
     res.send({status: 'success', message: 'Logged In'})
 })
+
+app.get('/currentSession', (req, res) => {
+    res.send(req.session.user)
+})
+
+app.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) return res.send({ err: 'Error al desloguearse'})
+        res.send({message: 'Logged out'})
+    })
+})

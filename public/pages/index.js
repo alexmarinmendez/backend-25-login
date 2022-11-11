@@ -14,6 +14,8 @@ submitBtn.addEventListener('click', (e) => {
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(result => result.json())
-        .then(() => location.replace('./dashboard.html'))
+    }).then(result => {
+        if (result.status === 400) console.log('error') //modal indicando el error
+        else location.replace('./profile.html')
+    })
 })
