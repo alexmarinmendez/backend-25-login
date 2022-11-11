@@ -15,3 +15,8 @@ app.use(baseSession)
 app.use(express.static('public'))
 
 let users = []
+
+app.post('/register', (req, res) => {
+    users.push(req.body)
+    console.log('Backend => ', users)
+})
