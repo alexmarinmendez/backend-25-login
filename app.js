@@ -20,5 +20,16 @@ app.post('/register', (req, res) => {
     let user = users.find(item => item.name === req.body.name)
     if (user) return res.status(400).send({err: 'User already exists'})
     users.push(req.body)
-    console.log('Backend => ', users)
+    res.send(users)
+})
+
+app.post('/login', (req, res) => {
+    let user = users.find(item => item.name === req.body.name)
+    if (!user) return res.status(400).send({err: 'User not found'})
+    if (user.password!==req.body.password) return res.status(400).send({err: 'Password is invalid'})
+    req.session.user = {
+        name: user.name,
+        address: user.address
+    }
+    res.send({status: 'success', message: 'Logged In'})
 })

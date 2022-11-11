@@ -1,19 +1,19 @@
 let submitBtn = document.getElementById('submitBtn')
-let formRegister = document.getElementById('formRegister')
+let formLogin = document.getElementById('formLogin')
 
 submitBtn.addEventListener('click', (e) => {
     e.preventDefault()
     let obj = {}
-    let data = new FormData(formRegister)
+    let data = new FormData(formLogin)
     data.forEach((value, key) => obj[key]=value)
+    console.log(obj)
 
-    fetch('/register', {
+    fetch('/login', {
         method: "POST",
         body: JSON.stringify(obj),
         headers: {
             'Content-Type': 'application/json'
         }
     }).then(result => result.json())
-        .then(() => location.replace('./pages/login.html'))
-        // .then((json) => console.log(json))
+        .then(() => location.replace('./dashboard.html'))
 })
